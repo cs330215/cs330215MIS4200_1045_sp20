@@ -15,7 +15,7 @@ namespace cs330215MIS4200_1045_sp20.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "My MIS4200 description.";
 
             return View();
         }
