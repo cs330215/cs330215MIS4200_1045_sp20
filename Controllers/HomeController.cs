@@ -15,14 +15,14 @@ namespace cs330215MIS4200_1045_sp20.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "My MIS4200 description.";
+            ViewBag.Message = "Some Fun Facts ";
 
             return View();
         }
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "Casey Lynn Shows";
 
             return View();
         }
