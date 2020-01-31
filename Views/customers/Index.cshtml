@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<cs330215MIS4200_1045_sp20.customer>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Customer Index";
 }
 
-<h2>Index</h2>
+<h2>Customer Index</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -24,7 +24,6 @@
             @Html.DisplayNameFor(model => model.phone)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.customerSince)
         </th>
         <th></th>
     </tr>
@@ -44,7 +43,6 @@
             @Html.DisplayFor(modelItem => item.phone)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.customerSince)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.customerID }) |

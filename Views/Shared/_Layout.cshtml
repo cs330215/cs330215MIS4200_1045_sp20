@@ -24,13 +24,15 @@
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    ##(writing on page, method, controller)
+                    <li>@Html.ActionLink("Customers", "Index", "customers")</li>
+                    @*(writing on page, method to go to, what controller)*@
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
         </div>
     </div>
     <div class="container body-content">
+        <br /> @*//adds a space between navigation bar and jumbotron section*@
         @RenderBody()
         <hr />
         <footer>
