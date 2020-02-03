@@ -14,5 +14,9 @@ namespace cs330215MIS4200_1045_sp20.DAL
         }
         public DbSet<Orders> Orders { get; set; }
         public DbSet<customer> Customers { get; set; }
+        public DbSet<Products> Products { get; set; }
+        public DbSet<OrderDetail> OrderDetails { get; set; }
+
+        // public System.Data.Entity.DbSet<cs330215MIS4200_1045_sp20.Models.Products> Products { get; set; }
     }
 }
