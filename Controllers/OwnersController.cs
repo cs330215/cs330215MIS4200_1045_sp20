@@ -11,107 +11,107 @@ using cs330215MIS4200_1045_sp20.Models;
 
 namespace cs330215MIS4200_1045_sp20.Controllers
 {
-    public class ProductsController : Controller
+    public class OwnersController : Controller
     {
         private MIS4200Context db = new MIS4200Context();
 
-        // GET: Products
+        // GET: Owners
         public ActionResult Index()
         {
-            return View(db.Products.ToList());
+            return View(db.Owners.ToList());
         }
 
-        // GET: Products/Details/5
+        // GET: Owners/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Products products = db.Products.Find(id);
-            if (products == null)
+            Owners owners = db.Owners.Find(id);
+            if (owners == null)
             {
                 return HttpNotFound();
             }
-            return View(products);
+            return View(owners);
         }
 
-        // GET: Products/Create
+        // GET: Owners/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Products/Create
+        // POST: Owners/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "productsID,description,unitCost")] Products products)
+        public ActionResult Create([Bind(Include = "ownerID,ownerFirstName,ownerLastName,email,phone")] Owners owners)
         {
             if (ModelState.IsValid)
             {
-                db.Products.Add(products);
+                db.Owners.Add(owners);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(products);
+            return View(owners);
         }
 
-        // GET: Products/Edit/5
+        // GET: Owners/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Products products = db.Products.Find(id);
-            if (products == null)
+            Owners owners = db.Owners.Find(id);
+            if (owners == null)
             {
                 return HttpNotFound();
             }
-            return View(products);
+            return View(owners);
         }
 
-        // POST: Products/Edit/5
+        // POST: Owners/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "productsID,description,unitCost")] Products products)
+        public ActionResult Edit([Bind(Include = "ownerID,ownerFirstName,ownerLastName,email,phone")] Owners owners)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(products).State = EntityState.Modified;
+                db.Entry(owners).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(products);
+            return View(owners);
         }
 
-        // GET: Products/Delete/5
+        // GET: Owners/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Products products = db.Products.Find(id);
-            if (products == null)
+            Owners owners = db.Owners.Find(id);
+            if (owners == null)
             {
                 return HttpNotFound();
             }
-            return View(products);
+            return View(owners);
         }
 
-        // POST: Products/Delete/5
+        // POST: Owners/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Products products = db.Products.Find(id);
-            db.Products.Remove(products);
+            Owners owners = db.Owners.Find(id);
+            db.Owners.Remove(owners);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

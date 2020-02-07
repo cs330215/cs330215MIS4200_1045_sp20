@@ -6,118 +6,121 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using cs330215MIS4200_1045_sp20;
 using cs330215MIS4200_1045_sp20.DAL;
+using cs330215MIS4200_1045_sp20.Models;
 
 namespace cs330215MIS4200_1045_sp20.Controllers
 {
-    public class OrdersController : Controller
+    public class PetDetailsController : Controller
     {
         private MIS4200Context db = new MIS4200Context();
 
-        // GET: Orders
+        // GET: PetDetails
         public ActionResult Index()
         {
-            var orders = db.Orders.Include(o => o.customer);
-            return View(orders.ToList());
+            var petDetails = db.petDetails.Include(p => p.Owners).Include(p => p.Pets);
+            return View(petDetails.ToList());
         }
 
-        // GET: Orders/Details/5
+        // GET: PetDetails/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Orders orders = db.Orders.Find(id);
-            if (orders == null)
+            PetDetails petDetails = db.petDetails.Find(id);
+            if (petDetails == null)
             {
                 return HttpNotFound();
             }
-            return View(orders);
+            return View(petDetails);
         }
 
-        // GET: Orders/Create
+        // GET: PetDetails/Create
         public ActionResult Create()
         {
-            ViewBag.customerID = new SelectList(db.Customers, "customerID", "fullName");
+            ViewBag.ownerID = new SelectList(db.Owners, "ownerID", "Full Name");
+            ViewBag.petID = new SelectList(db.Pets, "petID", "Pet Name");
             return View();
         }
-        // portion above is for the dropdown list that displays customer name when creating a new order
-        
-            // POST: Orders/Create
+
+        // POST: PetDetails/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "orderNum,description,orderDate,customerID")] Orders orders)
+        public ActionResult Create([Bind(Include = "petdetailID,petOwnerID,ownerID,petID")] PetDetails petDetails)
         {
             if (ModelState.IsValid)
             {
-                db.Orders.Add(orders);
+                db.petDetails.Add(petDetails);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.customerID = new SelectList(db.Customers, "customerID", "customerFirstName", orders.customerID);
-            return View(orders);
+            ViewBag.ownerID = new SelectList(db.Owners, "ownerID", "ownerFirstName", petDetails.ownerID);
+            ViewBag.petID = new SelectList(db.Pets, "petID", "petName", petDetails.petID);
+            return View(petDetails);
         }
 
-        // GET: Orders/Edit/5
+        // GET: PetDetails/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Orders orders = db.Orders.Find(id);
-            if (orders == null)
+            PetDetails petDetails = db.petDetails.Find(id);
+            if (petDetails == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.customerID = new SelectList(db.Customers, "customerID", "customerFirstName", orders.customerID);
-            return View(orders);
+            ViewBag.ownerID = new SelectList(db.Owners, "ownerID", "ownerFirstName", petDetails.ownerID);
+            ViewBag.petID = new SelectList(db.Pets, "petID", "petName", petDetails.petID);
+            return View(petDetails);
         }
 
-        // POST: Orders/Edit/5
+        // POST: PetDetails/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "orderNum,description,orderDate,customerID")] Orders orders)
+        public ActionResult Edit([Bind(Include = "petdetailID,petOwnerID,ownerID,petID")] PetDetails petDetails)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(orders).State = EntityState.Modified;
+                db.Entry(petDetails).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.customerID = new SelectList(db.Customers, "customerID", "customerFirstName", orders.customerID);
-            return View(orders);
+            ViewBag.ownerID = new SelectList(db.Owners, "ownerID", "ownerFirstName", petDetails.ownerID);
+            ViewBag.petID = new SelectList(db.Pets, "petID", "petName", petDetails.petID);
+            return View(petDetails);
         }
 
-        // GET: Orders/Delete/5
+        // GET: PetDetails/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Orders orders = db.Orders.Find(id);
-            if (orders == null)
+            PetDetails petDetails = db.petDetails.Find(id);
+            if (petDetails == null)
             {
                 return HttpNotFound();
             }
-            return View(orders);
+            return View(petDetails);
         }
 
-        // POST: Orders/Delete/5
+        // POST: PetDetails/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Orders orders = db.Orders.Find(id);
-            db.Orders.Remove(orders);
+            PetDetails petDetails = db.petDetails.Find(id);
+            db.petDetails.Remove(petDetails);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

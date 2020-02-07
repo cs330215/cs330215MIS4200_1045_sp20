@@ -8,13 +8,19 @@ namespace cs330215MIS4200_1045_sp20.Models
 {
     public class Owners
     {
+        [Key]
         public int ownerID { get; set; }
-        public string ownerFirstName { get; set; }
+
         [Display(Name = "First Name")]
+        public string ownerFirstName { get; set; }
+        [Display(Name = "Last Name")]
         public string ownerLastName { get; set; }
+        [Display(Name = "Email")]
         public string email { get; set; }
+        [Display(Name = "Phone")]
         public string phone { get; set; }
-        public ICollection<Pets> Pets { get; set; }
+        public ICollection<PetDetails> PetDetails { get; set; }
+        [Display(Name = "Full Name")]
         public string fullName
         {
             get
