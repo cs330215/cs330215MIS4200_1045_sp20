@@ -28,12 +28,12 @@ namespace cs330215MIS4200_1045_sp20.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Pets pets = db.Pets.Find(id);
-            if (pets == null)
+            Pets Pets = db.Pets.Find(id);
+            if (Pets == null)
             {
                 return HttpNotFound();
             }
-            return View(pets);
+            return View(Pets);
         }
 
         // GET: Pets/Create
@@ -47,16 +47,16 @@ namespace cs330215MIS4200_1045_sp20.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "petID,petName,petType,petBreed")] Pets pets)
+        public ActionResult Create([Bind(Include = "petID,petName,petType,petBreed")] Pets Pets)
         {
             if (ModelState.IsValid)
             {
-                db.Pets.Add(pets);
+                db.Pets.Add(Pets);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(pets);
+            return View(Pets);
         }
 
         // GET: Pets/Edit/5
@@ -79,15 +79,15 @@ namespace cs330215MIS4200_1045_sp20.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "petID,petName,petType,petBreed")] Pets pets)
+        public ActionResult Edit([Bind(Include = "petID,petName,petType,petBreed")] Pets Pets)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(pets).State = EntityState.Modified;
+                db.Entry(Pets).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(pets);
+            return View(Pets);
         }
 
         // GET: Pets/Delete/5
@@ -110,8 +110,8 @@ namespace cs330215MIS4200_1045_sp20.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Pets pets = db.Pets.Find(id);
-            db.Pets.Remove(pets);
+            Pets Pets = db.Pets.Find(id);
+            db.Pets.Remove(Pets);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

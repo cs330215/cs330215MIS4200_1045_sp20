@@ -19,7 +19,7 @@ namespace cs330215MIS4200_1045_sp20.DAL
         // SD2
         public DbSet<Owners> Owners { get; set; }
         public DbSet<Pets> Pets { get; set; }
-        public DbSet<PetDetails> petDetails { get; set; }
+        public DbSet<PetDetails> PetDetails { get; set; }
 
         // add this method - it will be used later
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

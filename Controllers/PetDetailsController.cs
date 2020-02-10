@@ -18,7 +18,7 @@ namespace cs330215MIS4200_1045_sp20.Controllers
         // GET: PetDetails
         public ActionResult Index()
         {
-            var petDetails = db.petDetails.Include(p => p.Owners).Include(p => p.Pets);
+            var petDetails = db.PetDetails.Include(p => p.Owners).Include(p => p.Pets);
             return View(petDetails.ToList());
         }
 
@@ -29,7 +29,7 @@ namespace cs330215MIS4200_1045_sp20.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PetDetails petDetails = db.petDetails.Find(id);
+            PetDetails petDetails = db.PetDetails.Find(id);
             if (petDetails == null)
             {
                 return HttpNotFound();
@@ -50,18 +50,18 @@ namespace cs330215MIS4200_1045_sp20.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "petdetailID,petOwnerID,ownerID,petID")] PetDetails petDetails)
+        public ActionResult Create([Bind(Include = "petOwnerID,ownerID,petID")] PetDetails PetDetails)
         {
             if (ModelState.IsValid)
             {
-                db.petDetails.Add(petDetails);
+                db.PetDetails.Add(PetDetails);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ownerID = new SelectList(db.Owners, "ownerID", "ownerFirstName", petDetails.ownerID);
-            ViewBag.petID = new SelectList(db.Pets, "petID", "petName", petDetails.petID);
-            return View(petDetails);
+            ViewBag.ownerID = new SelectList(db.Owners, "ownerID", "fullName", PetDetails.ownerID);
+            ViewBag.petID = new SelectList(db.Pets, "petID", "petName", PetDetails.petID);
+            return View(PetDetails);
         }
 
         // GET: PetDetails/Edit/5
@@ -71,14 +71,14 @@ namespace cs330215MIS4200_1045_sp20.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PetDetails petDetails = db.petDetails.Find(id);
-            if (petDetails == null)
+            PetDetails PetDetails = db.PetDetails.Find(id);
+            if (PetDetails == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.ownerID = new SelectList(db.Owners, "ownerID", "ownerFirstName", petDetails.ownerID);
-            ViewBag.petID = new SelectList(db.Pets, "petID", "petName", petDetails.petID);
-            return View(petDetails);
+            ViewBag.ownerID = new SelectList(db.Owners, "ownerID", "fullName", PetDetails.ownerID);
+            ViewBag.petID = new SelectList(db.Pets, "petID", "petName", PetDetails.petID);
+            return View(PetDetails);
         }
 
         // POST: PetDetails/Edit/5
@@ -86,17 +86,17 @@ namespace cs330215MIS4200_1045_sp20.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "petdetailID,petOwnerID,ownerID,petID")] PetDetails petDetails)
+        public ActionResult Edit([Bind(Include = "petOwnerID,ownerID,petID")] PetDetails PetDetails)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(petDetails).State = EntityState.Modified;
+                db.Entry(PetDetails).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.ownerID = new SelectList(db.Owners, "ownerID", "ownerFirstName", petDetails.ownerID);
-            ViewBag.petID = new SelectList(db.Pets, "petID", "petName", petDetails.petID);
-            return View(petDetails);
+            ViewBag.ownerID = new SelectList(db.Owners, "ownerID", "fullName", PetDetails.ownerID);
+            ViewBag.petID = new SelectList(db.Pets, "petID", "petName", PetDetails.petID);
+            return View(PetDetails);
         }
 
         // GET: PetDetails/Delete/5
@@ -106,12 +106,12 @@ namespace cs330215MIS4200_1045_sp20.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PetDetails petDetails = db.petDetails.Find(id);
-            if (petDetails == null)
+            PetDetails PetDetails = db.PetDetails.Find(id);
+            if (PetDetails == null)
             {
                 return HttpNotFound();
             }
-            return View(petDetails);
+            return View(PetDetails);
         }
 
         // POST: PetDetails/Delete/5
@@ -119,8 +119,8 @@ namespace cs330215MIS4200_1045_sp20.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            PetDetails petDetails = db.petDetails.Find(id);
-            db.petDetails.Remove(petDetails);
+            PetDetails PetDetails = db.PetDetails.Find(id);
+            db.PetDetails.Remove(PetDetails);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
