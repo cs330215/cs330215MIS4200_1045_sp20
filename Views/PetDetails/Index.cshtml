@@ -9,7 +9,7 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
+<table class="table table-bordered table-hover">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Owners.fullName)
@@ -20,21 +20,22 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Owners.fullName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Pets.petName)
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Owners.fullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Pets.petName)
 
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.petOwnerID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.petOwnerID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.petOwnerID })
-        </td>
-    </tr>
-}
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.petOwnerID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.petOwnerID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.petOwnerID })
+            </td>
+        </tr>
+    }
 
 </table>
