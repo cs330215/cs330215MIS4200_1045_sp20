@@ -11,10 +11,12 @@ namespace cs330215MIS4200_1045_sp20.Models
         [Key]
         public int petOwnerID { get; set; }
         [Display(Name = "Owner ID")]
+        [Required]
         public int ownerID { get; set; }
         public virtual Owners Owners { get; set; }
         // the next two properties link the petDetail to the Pets
         [Display(Name = "Pet ID")]
+        [Required]
         public int petID { get; set; }
         public virtual Pets Pets { get; set; }
 
